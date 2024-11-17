@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.stage.Stage?>
+<?import javafx.scene.Scene?>
+
+<Stage title="%Window" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+       fx:controller="com.example.reprojector.MainSceneController">
+    <scene>
+        <Scene>
+            <StackPane fx:id="stackPane">
+                <TabPane fx:id="mainTabPane" tabClosingPolicy="UNAVAILABLE" disable="false">
+                    <stylesheets>
+                        <URL value="@style.css"/>
+                    </stylesheets>
+                    <tabs>
+                        <Tab text="%FirstTab.Title">
+                            <content>
+                                <VBox>
+                                    <HBox alignment="CENTER">
+                                        <padding>
+                                            <Insets bottom="5" left="20.0" right="20.0" top="5"/>
+                                        </padding>
+                                        <Button alignment="CENTER" fx:id="addInputPanelButton"
+                                                text="%FirstTab.AddInputPanelButton"
+                                                onAction="#addNewInput"/>
+                                    </HBox>
+                                    <ScrollPane fx:id="inputsScrollPane">
+                                        <VBox fx:id="inputsVBox"/>
+                                    </ScrollPane>
+                                </VBox>
+                            </content>
+                        </Tab>
+                        <Tab text="%SecondTab.Title" onSelectionChanged="#changeTab">
+                            <content>
+                                <VBox fx:id="globeParent" alignment="CENTER" spacing="20"
+                                      style="-fx-background-color: black;">
+                                    <children>
+                                        <Sphere fx:id="globe"/>
+                                    </children>
+                                </VBox>
+                            </content>
+                        </Tab>
+                        <Tab text="%ThirdTab.Title">
+                            <content>
+                                <HBox alignment="CENTER" spacing="20.0">
+                                    <padding>
+                                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                                    </padding>
+                                    <children>
+                                        <HBox alignment="CENTER" spacing="5">
+                                            <children>
+                                                <VBox alignment="CENTER" spacing="20.0">
+                                                    <children>
+                                                        <Label text="%Output.ImageWidth"/>
+                                                        <TextField fx:id="outputWidth"/>
+                                                    </children>
+                                                </VBox>
+                                                <VBox alignment="CENTER" spacing="20.0">
+                                                    <children>
+                                                        <Label text="%Output.ImageHeight"/>
+                                                        <TextField fx:id="outputHeight"/>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </HBox>
+                                        <HBox alignment="CENTER" spacing="5">
+                                            <children>
+                                                <VBox alignment="CENTER" spacing="20.0">
+                                                    <children>
+                                                        <Label text="%Projection"/>
+                                                        <ChoiceBox fx:id="projectionChoice"/>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </HBox>
+                                        <HBox alignment="CENTER" spacing="5">
+                                            <children>
+                                                <VBox alignment="CENTER" spacing="20.0">
+                                                    <children>
+                                                        <Label text="%FillColor"/>
+                                                        <ColorPicker fx:id="fillColorPicker"/>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </HBox>
+                            </content>
+                        </Tab>
+                        <Tab text="%ForthTab.Title" onSelectionChanged="#changeTab">
+                            <VBox alignment="CENTER" spacing="20.0">
+                                <ImageView fx:id="finalProjection" preserveRatio="true" pickOnBounds="true"/>
+                                <HBox alignment="CENTER" spacing="20.0" fx:id="projectionHBox">
+                                    <Button fx:id="exportProjectionButton" onAction="#exportMapProjection"
+                                            text="%ExportProjection"/>
+                                </HBox>
+                            </VBox>
+                        </Tab>
+                    </tabs>
+                </TabPane>
+                <ProgressIndicator fx:id="progressIndicator" visible="false"></ProgressIndicator>
+            </StackPane>
+        </Scene>
+    </scene>
+</Stage>
