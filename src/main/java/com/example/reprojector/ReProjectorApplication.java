@@ -16,7 +16,7 @@ public class ReProjectorApplication extends Application {
         WorldScaleData.init();
         URL url = ReProjectorApplication.class.getResource("/main-view.fxml");
         Locale locate = Locale.getDefault();
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("/Display", locate);
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("labels/Display", locate);
         assert url != null;
         mainStage = FXMLLoader.load(url, resourceBundle);
 

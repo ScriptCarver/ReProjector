@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 public class MapProjectionConverter extends StringConverter<MapProjection> {
     @Override
     public String toString(MapProjection mapProjection) {
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("/Display");
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("labels/Display");
         return resourceBundle.getString(mapProjection.name());
     }
 
