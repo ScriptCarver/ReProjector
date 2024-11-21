@@ -1,4 +1,4 @@
-package com.example.reprojector.helpers;
+package com.reprojector.helpers;
 
 public class Constants {
     public static final double multiplierOnPole = 3;

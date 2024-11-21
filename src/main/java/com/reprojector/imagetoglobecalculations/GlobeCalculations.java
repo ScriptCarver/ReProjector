@@ -1,4 +1,4 @@
-package com.example.reprojector.imagetoglobecalculations;
+package com.reprojector.imagetoglobecalculations;
 
 import java.awt.image.BufferedImage;
 

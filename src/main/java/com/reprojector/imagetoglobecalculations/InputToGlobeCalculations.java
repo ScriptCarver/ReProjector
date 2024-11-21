@@ -1,4 +1,4 @@
-package com.example.reprojector.imagetoglobecalculations;
+package com.reprojector.imagetoglobecalculations;
 
 public interface InputToGlobeCalculations {
 

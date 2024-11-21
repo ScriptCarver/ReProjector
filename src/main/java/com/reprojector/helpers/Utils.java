@@ -1,4 +1,4 @@
-package com.example.reprojector.helpers;
+package com.reprojector.helpers;
 
 public class Utils {
     public static long usableMemory() {

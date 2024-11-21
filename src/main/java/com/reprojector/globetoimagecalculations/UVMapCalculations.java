@@ -1,6 +1,6 @@
-package com.example.reprojector.globetoimagecalculations;
+package com.reprojector.globetoimagecalculations;
 
-import com.example.reprojector.helpers.ThreadsHolder;
+import com.reprojector.helpers.ThreadsHolder;
 
 public class UVMapCalculations implements GlobeToImageCalculations {
     private static final double[] proportions = new double[]{1,1};

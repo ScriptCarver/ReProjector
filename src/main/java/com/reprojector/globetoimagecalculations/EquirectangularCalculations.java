@@ -1,6 +1,6 @@
-package com.example.reprojector.globetoimagecalculations;
+package com.reprojector.globetoimagecalculations;
 
-import com.example.reprojector.helpers.ThreadsHolder;
+import com.reprojector.helpers.ThreadsHolder;
 
 public class EquirectangularCalculations implements GlobeToImageCalculations {
     private static final double[] proportions = new double[]{2.0, 1.0};

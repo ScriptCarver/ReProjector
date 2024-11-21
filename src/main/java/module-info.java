@@ -1,4 +1,4 @@
-module com.example.reprojector {
+module com.reprojector {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.desktop;
@@ -6,12 +6,12 @@ module com.example.reprojector {
     requires javafx.graphics;
     requires javafx.swing;
 
-    opens com.example.reprojector to javafx.fxml;
-    exports com.example.reprojector;
-    exports com.example.reprojector.options;
-    opens com.example.reprojector.options to javafx.fxml;
-    exports com.example.reprojector.helpers;
-    opens com.example.reprojector.helpers to javafx.fxml;
-    exports com.example.reprojector.imagetoglobecalculations;
-    opens com.example.reprojector.imagetoglobecalculations to javafx.fxml;
+    opens com.reprojector to javafx.fxml;
+    exports com.reprojector;
+    exports com.reprojector.options;
+    opens com.reprojector.options to javafx.fxml;
+    exports com.reprojector.helpers;
+    opens com.reprojector.helpers to javafx.fxml;
+    exports com.reprojector.imagetoglobecalculations;
+    opens com.reprojector.imagetoglobecalculations to javafx.fxml;
 }

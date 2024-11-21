@@ -1,8 +1,8 @@
-package com.example.reprojector;
+package com.reprojector;
 
-import com.example.reprojector.options.Defaults;
-import com.example.reprojector.options.MapProjection;
-import com.example.reprojector.options.MapProjectionConverter;
+import com.reprojector.options.Defaults;
+import com.reprojector.options.MapProjection;
+import com.reprojector.options.MapProjectionConverter;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.value.ChangeListener;
@@ -166,7 +166,7 @@ public class MainSceneController {
     public void addNewInput() {
         try {
             URL url = ReProjectorApplication.class.getResource("/single-input.fxml");
-            ResourceBundle resourceBundle = ResourceBundle.getBundle("/Display");
+            ResourceBundle resourceBundle = ResourceBundle.getBundle("labels/Display");
             assert url != null;
             HBox singleInput = FXMLLoader.load(url, resourceBundle);
             inputsVBox.getChildren().add(singleInput);

@@ -1,4 +1,4 @@
-package com.example.reprojector.globetoimagecalculations;
+package com.reprojector.globetoimagecalculations;
 
 public interface GlobeToImageCalculations {
     double[] getProportions();

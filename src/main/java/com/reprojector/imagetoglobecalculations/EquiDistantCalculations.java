@@ -1,6 +1,6 @@
-package com.example.reprojector.imagetoglobecalculations;
+package com.reprojector.imagetoglobecalculations;
 
-import com.example.reprojector.helpers.ThreadsHolder;
+import com.reprojector.helpers.ThreadsHolder;
 
 import java.awt.image.BufferedImage;
 

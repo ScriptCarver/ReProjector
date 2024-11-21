@@ -1,6 +1,8 @@
-package com.example.reprojector;
+package com.reprojector;
 
-import com.example.reprojector.options.*;
+import com.reprojector.options.Defaults;
+import com.reprojector.options.ImageInputMethod;
+import com.reprojector.options.ImageInputMethodConverter;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

@@ -1,4 +1,4 @@
-package com.example.reprojector;
+package com.reprojector;
 
 public class Launcher {
     public static void main(String[] args) {

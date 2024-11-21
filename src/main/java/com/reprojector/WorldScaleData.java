@@ -1,11 +1,11 @@
-package com.example.reprojector;
+package com.reprojector;
 
-import com.example.reprojector.globetoimagecalculations.EquirectangularCalculations;
-import com.example.reprojector.globetoimagecalculations.UVMapCalculations;
-import com.example.reprojector.helpers.ImageBuilder;
-import com.example.reprojector.helpers.Constants;
-import com.example.reprojector.options.Defaults;
-import com.example.reprojector.options.MapProjection;
+import com.reprojector.globetoimagecalculations.EquirectangularCalculations;
+import com.reprojector.globetoimagecalculations.UVMapCalculations;
+import com.reprojector.helpers.ImageBuilder;
+import com.reprojector.helpers.Constants;
+import com.reprojector.options.Defaults;
+import com.reprojector.options.MapProjection;
 import javafx.scene.paint.Color;
 import javafx.util.Pair;
 import java.awt.image.BufferedImage;
@@ -73,8 +73,8 @@ public class WorldScaleData {
         return singleInputImage;
     }
 
-    public static void setFillColor(Color fillColor){
-        if(WorldScaleData.fillColor != fillColor){
+    public static void setFillColor(Color fillColor) {
+        if (WorldScaleData.fillColor != fillColor) {
             WorldScaleData.fillColor = fillColor;
             fillColorChanged = true;
         }
@@ -132,7 +132,7 @@ public class WorldScaleData {
     }
 
     public static BufferedImage getUvMap() {
-        if ((listChanged || uvSizeChanged || fillColorChanged) && !inputs.isEmpty()) {
+        if ((listChanged || uvSizeChanged || fillColorChanged) && (!inputs.isEmpty() && inputsHasAnyImages())) {
             uvMap = ImageBuilder.uvImageFromList(inputs.stream().map(Pair::getValue).collect(Collectors.toCollection(ArrayList::new)), uvSize, uvSize, fillColor);
             uvSizeChanged = false;
             return uvMap;
@@ -141,13 +141,22 @@ public class WorldScaleData {
     }
 
     public static BufferedImage getProjectionImage() {
-        if ((listChanged || mapProjectionChanged || projectionSizeChanged || fillColorChanged) && !inputs.isEmpty()) {
+        if ((listChanged || mapProjectionChanged || projectionSizeChanged || fillColorChanged) && (!inputs.isEmpty() && inputsHasAnyImages())) {
             projectionImage = ImageBuilder.imageFromList(inputs.stream().map(Pair::getValue).collect(Collectors.toCollection(ArrayList::new)), projectionImageWidth, projectionImageHeight, mapProjection, fillColor);
             mapProjectionChanged = false;
             projectionSizeChanged = false;
             return projectionImage;
         }
         return projectionImage;
+    }
+
+    private static boolean inputsHasAnyImages() {
+        for (Pair<SingleInputController, SingleInputImage> input : inputs) {
+            if (input.getValue().getSourceImage() != null) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static void setListChangedToTrue() {

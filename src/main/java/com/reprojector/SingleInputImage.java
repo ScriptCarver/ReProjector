@@ -1,11 +1,11 @@
-package com.example.reprojector;
+package com.reprojector;
 
-import com.example.reprojector.helpers.Constants;
-import com.example.reprojector.imagetoglobecalculations.CastCalculations;
-import com.example.reprojector.imagetoglobecalculations.EquiDistantCalculations;
-import com.example.reprojector.imagetoglobecalculations.InputToGlobeCalculations;
-import com.example.reprojector.options.Defaults;
-import com.example.reprojector.options.ImageInputMethod;
+import com.reprojector.helpers.Constants;
+import com.reprojector.imagetoglobecalculations.CastCalculations;
+import com.reprojector.imagetoglobecalculations.EquiDistantCalculations;
+import com.reprojector.imagetoglobecalculations.InputToGlobeCalculations;
+import com.reprojector.options.Defaults;
+import com.reprojector.options.ImageInputMethod;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

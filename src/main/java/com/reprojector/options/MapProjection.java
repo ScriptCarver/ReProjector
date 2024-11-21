@@ -1,4 +1,4 @@
-package com.example.reprojector.options;
+package com.reprojector.options;
 
 public enum MapProjection {
     UV,

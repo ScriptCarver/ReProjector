@@ -1,11 +1,11 @@
-package com.example.reprojector.helpers;
+package com.reprojector.helpers;
 
-import com.example.reprojector.SingleInputImage;
-import com.example.reprojector.globetoimagecalculations.EquirectangularCalculations;
-import com.example.reprojector.globetoimagecalculations.GlobeToImageCalculations;
-import com.example.reprojector.globetoimagecalculations.UVMapCalculations;
-import com.example.reprojector.imagetoglobecalculations.InputToGlobeCalculations;
-import com.example.reprojector.options.MapProjection;
+import com.reprojector.SingleInputImage;
+import com.reprojector.globetoimagecalculations.EquirectangularCalculations;
+import com.reprojector.globetoimagecalculations.GlobeToImageCalculations;
+import com.reprojector.globetoimagecalculations.UVMapCalculations;
+import com.reprojector.imagetoglobecalculations.InputToGlobeCalculations;
+import com.reprojector.options.MapProjection;
 import javafx.scene.paint.Color;
 import java.awt.image.BufferedImage;
 import java.util.*;
@@ -30,40 +30,42 @@ public class ImageBuilder {
         inputImages.forEach(input -> {
             input.recalculate();
             BufferedImage addedImage = input.getResizedImage();
-            InputToGlobeCalculations imageToGlobeCalculation = input.getInputToGlobeCalculations();
-            int i = 0;
-            int heightStep;
-            int thisStep;
-            //Loop through whole image row by row
-            while (i < addedImage.getHeight()) {
-                //Calculating pixel height of added row
-                try {
-                    heightStep = Math.toIntExact(Utils.usableMemory() / Constants.memoryDividerForImageBuilding / addedImage.getWidth());
-                    thisStep = Math.min((addedImage.getHeight() - i), heightStep);
-                } catch (ArithmeticException exception) {
-                    thisStep = Math.min((addedImage.getHeight() - i), Integer.MAX_VALUE);
-                }
-                //Calculating coordinates of added pixels on composed image
-                int[][][] coordinates = globeToImageCalculations.imageCoordinates(imageToGlobeCalculation.angleCoordinates(i, thisStep), height, width);
-                int minX = Arrays.stream(coordinates).flatMap(Arrays::stream).map(a -> a[0]).min(Integer::compareTo).get();
-                int maxX = Arrays.stream(coordinates).flatMap(Arrays::stream).map(a -> a[0]).max(Integer::compareTo).get();
-                int minY = Arrays.stream(coordinates).flatMap(Arrays::stream).map(a -> a[1]).min(Integer::compareTo).get();
-                int maxY = Arrays.stream(coordinates).flatMap(Arrays::stream).map(a -> a[1]).max(Integer::compareTo).get();
-                int snippetWidth = maxX - minX + 1;
-                int snippetHeight = maxY - minY + 1;
-                //Getting pixels added up to this point
-                int[] mainImagePixels = new int[snippetWidth * snippetHeight * 4];
-                newImage.getRaster().getPixels(minX, minY, snippetWidth, snippetHeight, mainImagePixels);
-                AtomicIntegerArray mainImagePixelsAtomic = fillInitialPixelArray(mainImagePixels, minX, minY, snippetWidth, snippetHeight, counts);
-                //Adding pixels of new image
-                addOtherImagePixels(mainImagePixelsAtomic, addedImage, minX, minY, i, thisStep, snippetWidth, coordinates, counts);
-                //Dividing accumulated value of pixels by count of pixels that took part in creating it
-                preparePixelsToDraw(mainImagePixels, mainImagePixelsAtomic, minX, minY, snippetWidth, coordinates, counts);
+            if(addedImage != null) {
+                InputToGlobeCalculations imageToGlobeCalculation = input.getInputToGlobeCalculations();
+                int i = 0;
+                int heightStep;
+                int thisStep;
+                //Loop through whole image row by row
+                while (i < addedImage.getHeight()) {
+                    //Calculating pixel height of added row
+                    try {
+                        heightStep = Math.toIntExact(Utils.usableMemory() / Constants.memoryDividerForImageBuilding / addedImage.getWidth());
+                        thisStep = Math.min((addedImage.getHeight() - i), heightStep);
+                    } catch (ArithmeticException exception) {
+                        thisStep = Math.min((addedImage.getHeight() - i), Integer.MAX_VALUE);
+                    }
+                    //Calculating coordinates of added pixels on composed image
+                    int[][][] coordinates = globeToImageCalculations.imageCoordinates(imageToGlobeCalculation.angleCoordinates(i, thisStep), height, width);
+                    int minX = Arrays.stream(coordinates).flatMap(Arrays::stream).map(a -> a[0]).min(Integer::compareTo).get();
+                    int maxX = Arrays.stream(coordinates).flatMap(Arrays::stream).map(a -> a[0]).max(Integer::compareTo).get();
+                    int minY = Arrays.stream(coordinates).flatMap(Arrays::stream).map(a -> a[1]).min(Integer::compareTo).get();
+                    int maxY = Arrays.stream(coordinates).flatMap(Arrays::stream).map(a -> a[1]).max(Integer::compareTo).get();
+                    int snippetWidth = maxX - minX + 1;
+                    int snippetHeight = maxY - minY + 1;
+                    //Getting pixels added up to this point
+                    int[] mainImagePixels = new int[snippetWidth * snippetHeight * 4];
+                    newImage.getRaster().getPixels(minX, minY, snippetWidth, snippetHeight, mainImagePixels);
+                    AtomicIntegerArray mainImagePixelsAtomic = fillInitialPixelArray(mainImagePixels, minX, minY, snippetWidth, snippetHeight, counts);
+                    //Adding pixels of new image
+                    addOtherImagePixels(mainImagePixelsAtomic, addedImage, minX, minY, i, thisStep, snippetWidth, coordinates, counts);
+                    //Dividing accumulated value of pixels by count of pixels that took part in creating it
+                    preparePixelsToDraw(mainImagePixels, mainImagePixelsAtomic, minX, minY, snippetWidth, coordinates, counts);
 
-                newImage.getRaster().setPixels(minX, minY, snippetWidth, snippetHeight, mainImagePixels);
-                i += thisStep;
+                    newImage.getRaster().setPixels(minX, minY, snippetWidth, snippetHeight, mainImagePixels);
+                    i += thisStep;
+                }
+                input.dropUnneededVariables();
             }
-            input.dropUnneededVariables();
         });
 
         return fillEmptySpots(newImage, counts, fillColor);

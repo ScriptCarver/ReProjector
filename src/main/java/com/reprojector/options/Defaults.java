@@ -1,4 +1,4 @@
-package com.example.reprojector.options;
+package com.reprojector.options;
 
 import javafx.scene.paint.Color;
 

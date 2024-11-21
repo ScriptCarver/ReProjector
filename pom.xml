@@ -72,10 +72,10 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.example.reprojector/com.example.reprojector.Launcher</mainClass>
-                            <launcher>app</launcher>
-                            <jlinkZipName>app</jlinkZipName>
-                            <jlinkImageName>app</jlinkImageName>
+                            <mainClass>com.reprojector.Launcher</mainClass>
+                            <launcher>ReProjector</launcher>
+                            <jlinkZipName>ReProjector</jlinkZipName>
+                            <jlinkImageName>ReProjector</jlinkImageName>
                             <noManPages>true</noManPages>
                             <stripDebug>true</stripDebug>
                             <noHeaderFiles>true</noHeaderFiles>
@@ -85,24 +85,22 @@
             </plugin>
 
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.6.0</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <transformers>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>com.example.reprojector.Launcher</mainClass>
-                                </transformer>
-                            </transformers>
-                        </configuration>
-                    </execution>
-                </executions>
+                <groupId>org.panteleyev</groupId>
+                <artifactId>jpackage-maven-plugin</artifactId>
+                <version>1.4.0</version>
+                <configuration>
+                    <name>ReProjector</name>
+                    <type>APP_IMAGE</type>
+                    <appVersion>1.0.0</appVersion>
+                    <vendor>ScriptCarver</vendor>
+                    <destination>target/dist</destination>
+                    <module>com.reprojector/com.reprojector.Launcher</module>
+                    <runtimeImage>target/reprojector</runtimeImage>
+                    <linuxShortcut>true</linuxShortcut>
+                    <linuxPackageName>reprojector</linuxPackageName>
+                    <linuxAppCategory>Utilities</linuxAppCategory>
+                    <linuxMenuGroup>Utilities</linuxMenuGroup>
+                </configuration>
             </plugin>
         </plugins>
     </build>

@@ -10,7 +10,7 @@
 <?import javafx.scene.Scene?>
 
 <Stage title="%Window" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
-       fx:controller="com.example.reprojector.MainSceneController">
+       fx:controller="com.reprojector.MainSceneController">
     <scene>
         <Scene>
             <StackPane fx:id="stackPane">

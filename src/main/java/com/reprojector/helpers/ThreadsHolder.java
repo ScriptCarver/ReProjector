@@ -1,4 +1,4 @@
-package com.example.reprojector.helpers;
+package com.reprojector.helpers;
 
 import java.util.LinkedList;
 import java.util.concurrent.ExecutionException;

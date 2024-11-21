@@ -1,4 +1,4 @@
-package com.example.reprojector;
+package com.reprojector;
 
 import javafx.application.Application;
 import javafx.application.Platform;
